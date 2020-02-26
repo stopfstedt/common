@@ -120,7 +120,8 @@ export default class CourseMaterialsComponent extends Component {
       title: lm.title,
       type: lm.type,
       url: lm.url,
-      status: status.title
+      status: status.title,
+      isClickable: status.title === 'Final' && this.typesWithUrl.includes(lm.type)
     };
   }
 
@@ -138,7 +139,8 @@ export default class CourseMaterialsComponent extends Component {
       title: lm.title,
       type: lm.type,
       url: lm.url,
-      status: status.title
+      status: status.title,
+      isClickable: status.title === 'Final' && this.typesWithUrl.includes(lm.type)
     };
   }
 }

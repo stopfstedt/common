@@ -68,7 +68,7 @@
           }}
             <tr>
               <td colspan="4">
-                {{#if (contains lmObject.type this.typesWithUrl)}}
+                {{#if lmObject.isClickable}}
                   <a href={{lmObject.url}} rel="noopener" target="_blank">
                     {{lmObject.title}}
                   </a>
@@ -198,7 +198,7 @@
           }}
             <tr>
               <td colspan="3">
-                {{#if (contains lmObject.type this.typesWithUrl)}}
+                {{#if lmObject.isClickable}}
                   <a href={{lmObject.url}} rel="noopener" target="_blank">
                     {{lmObject.title}}
                   </a>
