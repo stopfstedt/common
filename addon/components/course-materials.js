@@ -51,7 +51,8 @@ export default class CourseMaterialsComponent extends Component {
              (obj.description && obj.description.match(exp)) ||
              (obj.author && obj.author.match(exp)) ||
              (obj.type && obj.type.match(exp)) ||
-             (obj.citation && obj.citation.match(exp));
+             (obj.citation && obj.citation.match(exp)) ||
+             (obj.status && obj.status.match(exp));
     });
   }
 
@@ -67,7 +68,8 @@ export default class CourseMaterialsComponent extends Component {
              (obj.author && obj.author.match(exp)) ||
              (obj.type && obj.type.match(exp)) ||
              (obj.citation && obj.citation.match(exp)) ||
-             (obj.sessionTitle && obj.sessionTitle.match(exp));
+             (obj.sessionTitle && obj.sessionTitle.match(exp)) ||
+             (obj.status && obj.status.match(exp));
     });
   }
 
@@ -109,13 +111,16 @@ export default class CourseMaterialsComponent extends Component {
 
   async buildClmObject(clm) {
     const lm = await clm.get('learningMaterial');
+    const status = await lm.get('status');
+    console.log(status.title);
     return {
       author: lm.originalAuthor,
       citation: lm.citation,
       description: lm.description,
       title: lm.title,
       type: lm.type,
-      url: lm.url
+      url: lm.url,
+      status: status.title
     };
   }
 
@@ -123,6 +128,7 @@ export default class CourseMaterialsComponent extends Component {
     const lm = await slm.get('learningMaterial');
     const session = await slm.session;
     const firstOfferingDate = await session.firstOfferingDate;
+    const status = await lm.get('status');
     return {
       author: lm.originalAuthor,
       citation: lm.citation,
@@ -131,7 +137,8 @@ export default class CourseMaterialsComponent extends Component {
       sessionTitle: session.title,
       title: lm.title,
       type: lm.type,
-      url: lm.url
+      url: lm.url,
+      status: status.title
     };
   }
 }

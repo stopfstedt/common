@@ -44,12 +44,19 @@
           >
             {{t "general.author"}}
           </SortableTh>
+          <SortableTh
+            @sortedAscending={{this.clmSortedAscending}}
+            @sortedBy={{or (eq @courseSort "status") (eq @courseSort "status:desc")}}
+            @click={{action "courseSortBy" "status"}}
+          >
+            {{t "general.publicationStatus"}}
+          </SortableTh>
         </tr>
       </thead>
       <tbody>
         {{#if (not this.courseLearningMaterialObjects)}}
           <tr>
-            <td colspan="6" align="center">
+            <td colspan="7" align="center">
               <FaIcon @icon="spinner" class="orange" @size="2x" @spin={{true}} />
             </td>
           </tr>
@@ -79,10 +86,13 @@
               <td>
                 {{lmObject.author}}
               </td>
+              <td>
+                {{capitalize lmObject.status}}
+              </td>
             </tr>
           {{else}}
             <tr>
-              <td colspan="6" align="center">
+              <td colspan="7" align="center">
                 {{if
                   this.courseQuery
                   (t "general.noResultsFound")
@@ -164,12 +174,19 @@
           >
             {{t "general.firstOffering"}}
           </SortableTh>
+          <SortableTh
+            @sortedAscending={{this.slmSortedAscending}}
+            @sortedBy={{or (eq @sessionSort "status") (eq @sessionSort "status:desc")}}
+            @click={{action "sessionSortBy" "status"}}
+          >
+            {{t "general.publicationStatus"}}
+          </SortableTh>
         </tr>
       </thead>
       <tbody>
         {{#if (not this.sessionLearningMaterialObjects)}}
           <tr>
-            <td colspan="9" align="center">
+            <td colspan="10" align="center">
               <FaIcon @icon="spinner" class="orange" @size="2x" @spin={{true}} />
             </td>
           </tr>
@@ -209,10 +226,13 @@
                   {{t "general.none"}}
                 {{/if}}
               </td>
+              <td>
+                {{capitalize lmObject.status}}
+              </td>
             </tr>
           {{else}}
             <tr>
-              <td colspan="9" align="center">
+              <td colspan="10" align="center">
                 {{if
                   this.sessionQuery
                   (t "general.noResultsFound")
