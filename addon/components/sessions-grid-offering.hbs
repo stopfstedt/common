@@ -6,7 +6,7 @@
   {{did-insert (set this.row)}}
 >
   {{#if (and this.isEditing (is-fulfilled @offering.session.course.cohorts))}}
-    <td colspan={{if @canUpdate "9" "8"}} class="expanded-offering-manager">
+    <td colspan={{if @canUpdate "10" "9"}} class="expanded-offering-manager">
       <OfferingForm
         @showRoom={{true}}
         @showInstructors={{true}}
@@ -66,6 +66,20 @@
     </td>
     <td class="text-center">
       {{get (await @offering.allLearners) "length"}}
+    </td>
+    <td
+        colspan="2"
+        title={{join
+        ", "
+        (map-by "fullName" (sort-by "fullName" (await @offering.learners)))
+    }}
+    >
+      {{truncate
+          (join
+            ", " (map-by "fullName" (sort-by "fullName" (await @offering.learners)))
+          )
+          30
+      }}
     </td>
     <td
       colspan="2"
